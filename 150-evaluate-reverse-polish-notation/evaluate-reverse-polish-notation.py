@@ -10,7 +10,7 @@ class Solution:
             num2 = result.pop()
             result.append(self.evaluate(num1, num2, token))
         
-        return result.pop()
+        return result[0]
     def evaluate(self, num1, num2, op):
         if op == '+':
             return num2 + num1
