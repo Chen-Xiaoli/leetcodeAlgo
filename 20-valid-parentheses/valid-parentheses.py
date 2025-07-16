@@ -1,28 +1,21 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        if len(s) % 2 != 0:
+            return False
         stack = []
 
         for item in s:
             if item == '(' or item == '[' or item == '{':
                 stack.append(item)
-            elif item == ')':
-                if len(stack) and stack[-1] == '(':
+            else:
+                if not stack:
+                    return False
+                top = stack[-1]   
+                if (top == '(' and item == ')') or (top == '[' and item == ']') or (top == '{' and item == '}'):
                     stack.pop()
                 else:
                     return False
-            elif item == ']':
-                if len(stack) and stack[-1] == '[':
-                    stack.pop()
-                else:
-                    return False
-            elif item == '}':
-                if len(stack) and stack[-1] == '{':
-                    stack.pop()
-                else:
-                    return False
-        if len(stack):
-            return False
-        return True
+        return not stack
                 
 
         
