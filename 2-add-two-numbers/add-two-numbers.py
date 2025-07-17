@@ -6,60 +6,35 @@
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
 
-        dummy = ListNode(-1)
-        newHead =  ListNode(-1)
-        dummy.next = newHead
+        dummy = ListNode()
 
-        cur1 = l1
-        cur2 = l2
-        c = 0
+        carryBit = 0
 
-        while cur1 and cur2:
-            newNode =  ListNode(-1)
-            if (cur1.val + cur2.val + c - 10) >= 0:
-                newNode.val = cur1.val + cur2.val + c - 10 
-                c = 1
-            else:
-                newNode.val = cur1.val + cur2.val + c
-                c = 0
-            newHead.next = newNode
-            newHead = newHead.next
+        cur = dummy
 
-            cur1 = cur1.next
-            cur2 = cur2.next
-        while cur1:
-            newNode =  ListNode(-1)
-            if cur1.val + c - 10 >= 0:
-                newNode.val = cur1.val + c - 10 
-                c = 1
-            else:
-                newNode.val = cur1.val + c
-                c = 0
-            newHead.next = newNode
-            newHead = newHead.next
+        while l1 or l2:
+            x = l1.val if l1 else 0
+            y = l2.val if l2 else 0
 
-            cur1 = cur1.next
+            sum = x + y + carryBit
 
-        while cur2:
-            newNode =  ListNode(-1)
-            if cur2.val + c - 10 >= 0:
-                newNode.val = cur2.val + c - 10 
-                c = 1
-            else:
-                newNode.val = cur2.val + c
-                c = 0
-            newHead.next = newNode
-            newHead = newHead.next
+            carryBit = sum // 10
+            
+            digit = sum % 10
 
-            cur2 = cur2.next
-       
-        if c:
-            newNode =  ListNode(-1)
-            newNode.val = c
-            newHead.next = newNode
+            digitNode = ListNode(digit)
 
-        return dummy.next.next
+            cur.next = digitNode
+            cur = cur.next
 
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        if carryBit == 1:
+            digitNode = ListNode(carryBit)
+            cur.next = digitNode
+        return dummy.next
 
 
             
