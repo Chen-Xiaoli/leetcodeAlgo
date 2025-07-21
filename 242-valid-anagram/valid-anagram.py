@@ -11,17 +11,12 @@ class Solution:
             else:
                 dic[ch] += 1
 
-        dic1 = {}
-
         for ch in t:
-            if ch not in dic1:
-                dic1[ch] = 1
-            else:
-                dic1[ch] += 1
-        
-        for key, value in dic.items():
-            if key in dic1 and value == dic1[key]:
-                continue
+            if ch in dic:
+                dic[ch] -= 1
+                if dic[ch] < 0:
+                    return False
             else:
                 return False
+        
         return True
