@@ -7,10 +7,10 @@ class MinStack:
 
     def push(self, val: int) -> None:
         self.stack.append(val)
-        if self. min_stack:
+        if self.min_stack:
            top = self.min_stack[-1]
            if val <= top:
-            self.min_stack.append(val)
+               self.min_stack.append(val)
         else:
             self.min_stack.append(val)
         
@@ -32,7 +32,10 @@ class MinStack:
         
 
     def getMin(self) -> int:
-        return self.min_stack[-1]
+        if self.min_stack:
+            return self.min_stack[-1]
+        else:
+            raise IndexError('min stack is empty')
     
     def is_empty(self):
         return len(self.stack) == 0

@@ -1,3 +1,6 @@
+from typing import List
+import collections
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         count = 0
